@@ -1,12 +1,17 @@
 import { Request, Response } from 'express'
 import  User from '../models/User'
-import AuthInterface from './../interfaces/auth'
+import AuthInterface from '../interfaces/auth'
 import jwt from 'jsonwebtoken';
 class UserController {
     
     public async index (req: AuthInterface, res: Response): Promise<Response> {
-        const users = await User.findOne({include:User.associations.address, where:{id : req.user?.id}});
-        return res.json(users);
+        try{
+            const users = await User.findOne({include:User.associations.address, where:{id : req.user?.id}});
+            return res.json(users);
+        }catch(err){
+            return res.json({status:'error'});
+        }
+        
     }
     public async auth (req: Request, res: Response): Promise<Response> {
         const { email, password } = req.body;
@@ -33,7 +38,7 @@ class UserController {
         }
      
     }
-     public async logout (req: AuthInterface, res: Response): Promise<Response> {
+    public async logout (req: AuthInterface, res: Response): Promise<Response> {
      
         return res.status(200).json({ auth: false, token: null });
     }
