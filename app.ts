@@ -3,12 +3,20 @@ import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import routes from './routes/routes';
-import dbInit from './db/init';
+import routes from './src/routes/routes';
+import dbInit from './src/db/init';
 import * as bodyParser from 'body-parser';
+import fs from 'fs';
+import swaggerUi = require('swagger-ui-express')
+
 class App {
     public express: express.Application
-
+    //SWAGGER
+    private swaggerFile: any = (process.cwd()+"/docs/swagger.json");
+    private swaggerData: any = fs.readFileSync(this.swaggerFile, 'utf8');
+    private customCss: any = fs.readFileSync((process.cwd()+"/docs/swagger.css"), 'utf8');
+    private swaggerDocument = JSON.parse(this.swaggerData);
+    
     public constructor () {
           this.express = express()
           dotenv.config();
@@ -40,6 +48,18 @@ class App {
 
     private routes (): void {
         this.express.use(routes)
+
+        //this.express.use('/api/docs', swaggerUi.serve,
+           // swaggerUi.setup(this.swaggerDocument, undefined, undefined, this.customCss));
+           this.express.use(
+                "/docs",
+                swaggerUi.serve,
+                swaggerUi.setup(undefined, {
+                  swaggerOptions: {
+                    url: "docs/swagger.json",
+                  },
+                })
+              );
     }
 }
 

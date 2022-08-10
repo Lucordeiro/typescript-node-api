@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import addressController from './../controllers/addressController';
+import addressController from '../controllers/addressController';
 
 import AuthMiddleware from '../middlewares/auth';
 const authMiddleware = new AuthMiddleware();

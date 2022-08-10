@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import Address  from '../models/Address'
-import AuthInterface from './../interfaces/auth'
+import AuthInterface from '../interfaces/auth'
 
 class AddressController {
     public async index (req: AuthInterface, res: Response): Promise<Response> {

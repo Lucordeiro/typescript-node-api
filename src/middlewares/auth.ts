@@ -1,5 +1,5 @@
 import { Request ,Response, NextFunction } from 'express'
-import AuthInterface from './../interfaces/auth'
+import AuthInterface from '../interfaces/auth'
 import jwtService from 'jsonwebtoken'
 
 

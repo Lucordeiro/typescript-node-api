@@ -5,7 +5,7 @@ import addressRoutes from './addressRoutes';
 
 const app = express()
 
-app.use('/user', userRoutes)
-app.use('/address', addressRoutes)
+app.use('/api/user', userRoutes)
+app.use('/api/address', addressRoutes)
 
 export default app

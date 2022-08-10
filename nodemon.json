@@ -1,16 +1,12 @@
 {
     "restartable": "rs",
-    "ignore": [
-      ".git",
-      "dist",
-      "node_modules/**/node_modules"
-    ],
+    "ignore": [".git", "dist", "node_modules/**/node_modules"],
     "verbose": true,
     "events": {
-      "restart": "tsc"
+        "restart": "tsc"
     },
     "env": {
-      "NODE_ENV": "development"
+        "NODE_ENV": "development"
     },
     "ext": "ts,json"
-  }
+}
